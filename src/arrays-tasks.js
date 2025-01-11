@@ -484,8 +484,9 @@ function getHexRGBValues(arr) {
  *   getMaxItems([ 10, 2, 7, 5, 3, -5 ], 3) => [ 10, 7, 5 ]
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
-function getMaxItems(/* arr, n */) {
-  throw new Error('Not implemented');
+function getMaxItems(arr, n) {
+  const sorted = arr.sort((a, b) => b - a);
+  return sorted.slice(0, n);
 }
 
 /**
@@ -500,8 +501,8 @@ function getMaxItems(/* arr, n */) {
  *    findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']) => [ 'b', 'c' ]
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
-function findCommonElements(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function findCommonElements(arr1, arr2) {
+  return arr1.filter((x) => arr2.includes(x));
 }
 
 /**
@@ -515,8 +516,25 @@ function findCommonElements(/* arr1, arr2 */) {
  *    findLongestIncreasingSubsequence([3, 10, 2, 1, 20]) => longest is [3, 10] and [1, 20] => 2
  *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => longest is [7, 40, 80] => 3
  */
-function findLongestIncreasingSubsequence(/* nums */) {
-  throw new Error('Not implemented');
+function findLongestIncreasingSubsequence(nums) {
+  if (!nums.length) return 0;
+
+  const initial = [1, 1, nums[0]];
+
+  const result = nums.slice(1).reduce((acc, current) => {
+    let [maxLen, currLen] = acc;
+    const prev = acc[2];
+    if (current > prev) {
+      currLen += 1;
+    } else {
+      currLen = 1;
+    }
+
+    maxLen = Math.max(maxLen, currLen);
+    return [maxLen, currLen, current];
+  }, initial);
+
+  return result[0];
 }
 
 /**
@@ -533,8 +551,10 @@ function findLongestIncreasingSubsequence(/* nums */) {
  *  propagateItemsByPositionIndex([ 'a', 'b', 'c', null ]) => [ 'a', 'b', 'b', 'c', 'c', 'c',  null, null, null, null ]
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  return arr.flatMap((element, index) => {
+    return Array(index + 1).fill(element);
+  });
 }
 
 /**
