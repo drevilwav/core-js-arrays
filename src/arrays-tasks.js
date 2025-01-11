@@ -589,8 +589,23 @@ function shiftArray(arr, n) {
  *   sortDigitNamesByNumericOrder([ 'nine','eight','nine','eight' ]) => [ 'eight','eight','nine','nine']
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const order = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+
+  return arr.slice().sort((a, b) => {
+    return order.indexOf(a) - order.indexOf(b);
+  });
 }
 
 /**
@@ -612,8 +627,21 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const len = arr.length;
+  const half = Math.floor(len / 2);
+
+  if (len % 2 === 0) {
+    const head = arr.slice(0, half);
+    const tail = arr.slice(half);
+    return [...tail, ...head];
+  }
+  {
+    const head = arr.slice(0, half);
+    const middle = arr[half];
+    const tail = arr.slice(half + 1);
+    return [...tail, middle, ...head];
+  }
 }
 
 module.exports = {
